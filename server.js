@@ -22,22 +22,20 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) {
 
-    res.status(200).send('hello sheyab')
+  res.status(200).send('hello sheyab')
 });
 
 
 app.get('*', (req, res) => {
-    // console.log('this is for checking ', req);
-    res.status(404).render('./pages/error', { erorr: '404 NOT FOUND' })
+  // console.log('this is for checking ', req);
+  res.status(404).render('./pages/error', { erorr: '404 NOT FOUND' })
 });
 
 const client = new pg.Client(process.env.DATABASE_URL);
 
-client.connect(console.log('im', client))
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(`Host : ${PORT}`)
-        })
+client.connect()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Host : ${PORT}`);
     })
-
-
+  })
